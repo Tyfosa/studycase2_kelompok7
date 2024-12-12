@@ -6,11 +6,13 @@ public class Kelompok7{
     static String pesanan[][][] = new String[50][50][2];
     static String statusPembayaran[][] = new String[50][2];
     static String namaPelanggan[] = new String[50];
-    static int nomorMeja, totalHarga;
+    static int nomorMeja[] = new int[50], jumlah[][] = new int[50][50], totalHarga[] = new int[50];
+    static int hargaSementara[][][] = new int[50][50][1];
+    static int i = 0, j = 0;
 
     //TAMPIL MENU
     static void tampilMenu(){
-        System.out.println("===== MENU KAFE =====");
+        System.out.println("\n===== MENU KAFE =====");
         for (int i = 0; i < menuKafe.length; i++) {
             System.out.println((i+1) + ". " + menuKafe[i][0] + " - Rp " + menuKafe[i][1]);
         }
@@ -19,43 +21,30 @@ public class Kelompok7{
 
     //TAMBAH PESANAN DAN VALIDASI
     static void tambahPesanan(){
-        int i = 0, j = 0, pilihan, jumlah, hargaSementara;
-
-        if (namaPelanggan != null){
-            i++;
-        }
-
-        System.out.print("Masukkan nama pelanggan : ");
-        sc.nextLine();
-        namaPelanggan[i] = sc.nextLine();
-        System.out.print("Masukkan nomor meja : ");
-        nomorMeja = sc.nextInt();
-
-        boolean pesan = true;
-
-        while (pesan){
-            System.out.println("Pilih menu (1-4, atau 0 untuk selesai) : ");
-            pilihan = sc.nextInt();
-
-            if (pilihan == 1 || pilihan == 2 || pilihan == 3 || pilihan == 4){
-                for (int k = 0; k < pesanan[i][j].length; k++) {
-                    pesanan[i][j][k] = menuKafe[pilihan - 1][k];
-                    System.out.print("Masukkan jumlah item untuk " + pesanan[i][j][0] + " : ");
-                    jumlah = sc.nextInt();
-
-                    totalHarga += jumlah * Integer.parseInt(pesanan[i][j][1]);
-                }
-            } else if (pilihan == 0){
-                System.out.println("Pesanan berhasil ditambahkan.");
-                System.out.println("Total harga pesanan : Rp " + totalHarga);
-                pesan = false;
-            }
-        }
+  
     }
 
     //TAMPILKAN DAFTAR PESANAN
     static void tampilPesanan(){
+        System.out.println("\n===== DAFTAR PESANAN =====");
+        
+        for (int i = 0; i < namaPelanggan.length; i++) {
+            if (namaPelanggan[i] != null){
+                System.out.println("Nama Pelanggan : " + namaPelanggan[i]);
+                System.out.println("Nomor Meja     : " + nomorMeja[i]);
+                System.out.println("Detail Pesanan :");
 
+                for (int j = 0; j < pesanan[i].length; j++) {
+                    if (pesanan[i][j][0] != null) { 
+                        System.out.println("- " + pesanan[i][j][0] + " x " + jumlah[i][j] + " = Rp " + hargaSementara[i][j][0]);
+                    }
+                }
+
+            System.out.println("Total Harga Pesanan : Rp " + totalHarga[i]);
+            System.out.println("--------------------------");
+            }
+        }
+        return;
     }
 
     //PEMBAYARAN PESANAN
@@ -66,27 +55,29 @@ public class Kelompok7{
     public static void main(String[] args) {
         int menu;
 
-        System.out.println("====== MENU UTAMA ======");
-        System.out.println("1. Tambahkan Pesanan");
-        System.out.println("2. Tampilkan Daftar Pesanan");
-        System.out.println("3. Pembayaran dan Cetak Struk");
-        System.out.println("4. Keluar");
-        System.out.print("Pilih menu : ");
-        menu = sc.nextInt();
-
-        switch (menu){
-            case 1:
-                tampilMenu();
-                break;
-            case 2:
-                tampilPesanan();
-                break;
-            case 3:
-                pembayaranPesanan();
-                break;
-            case 4:
-                System.out.println("Terima kasih telah berbelanja di kafe kami!");
-                break;
+        while (true){
+            System.out.println("\n====== MENU UTAMA ======");
+            System.out.println("1. Tambahkan Pesanan");
+            System.out.println("2. Tampilkan Daftar Pesanan");
+            System.out.println("3. Pembayaran dan Cetak Struk");
+            System.out.println("4. Keluar");
+            System.out.print("Pilih menu : ");
+            menu = sc.nextInt();
+    
+            switch (menu){
+                case 1:
+                    tampilMenu();
+                    break;
+                case 2:
+                    tampilPesanan();
+                    break;
+                case 3:
+                    pembayaranPesanan();
+                    break;
+                case 4:
+                    System.out.println("\nTerima kasih telah berbelanja di kafe kami!");
+                    return;
+            }
         }
     }
 }
