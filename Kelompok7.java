@@ -12,7 +12,7 @@ public class Kelompok7{
 
     //TAMPIL MENU
     static void tampilMenu(){
-        System.out.println("\n===== MENU KAFE =====");
+        System.out.println("\n===== MENU KAFE KELOMPOK 7 =====");
         for (int i = 0; i < menuKafe.length; i++) {
             System.out.println((i+1) + ". " + menuKafe[i][0] + " - Rp " + menuKafe[i][1]);
         }
@@ -92,20 +92,55 @@ public class Kelompok7{
                 }
 
             System.out.println("Total Harga Pesanan : Rp " + totalHarga[i]);
-            System.out.println("--------------------------");
             }
         }
         return;
     }
 
     //PEMBAYARAN PESANAN
-    static void pembayaranPesanan(){
-
+    static void pembayaranPesanan() {
+        System.out.print("\nMasukkan Nama Pelanggan: ");
+        sc.nextLine(); // Membersihkan buffer
+        String nama = sc.nextLine();
+    
+        boolean ditemukan = false;
+        for (int i = 0; i < namaPelanggan.length; i++) {
+            if (namaPelanggan[i] != null && namaPelanggan[i].equalsIgnoreCase(nama)) {
+                ditemukan = true;
+                System.out.println("\n===== PEMBAYARAN =====");
+                System.out.println("Nama Pelanggan : " + namaPelanggan[i]);
+                System.out.println("Nomor Meja     : " + nomorMeja[i]);
+                System.out.println("Detail Pesanan :");
+    
+                for (int j = 0; j < pesanan[i].length; j++) {
+                    if (pesanan[i][j][0] != null) {
+                        System.out.println("- " + pesanan[i][j][0] + " x " + jumlah[i][j] + " = Rp " + hargaSementara[i][j][0]);
+                    }
+                }
+    
+                System.out.println("Total Harga Pesanan : Rp " + totalHarga[i]);
+                System.out.print("Masukkan jumlah uang yang dibayarkan: ");
+                int jumlahUang = sc.nextInt();
+    
+                if (jumlahUang >= totalHarga[i]) {
+                    int kembalian = jumlahUang - totalHarga[i];
+                    System.out.println("Pembayaran berhasil! Kembalian: Rp " + kembalian);
+                } else {
+                    System.out.println("Uang yang dibayarkan kurang. Pembayaran gagal.");
+                }
+                break;
+            }
+        }
+    
+        if (!ditemukan) {
+            System.out.println("\nPelanggan dengan nama " + nama + " tidak ditemukan.");
+        }
     }
+    
 
     public static void main(String[] args) {
         int menu;
-
+        
         while (true){
             System.out.println("\n====== MENU UTAMA ======");
             System.out.println("1. Tambahkan Pesanan");
