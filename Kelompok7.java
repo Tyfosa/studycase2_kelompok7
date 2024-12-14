@@ -27,7 +27,6 @@ public class Kelompok7{
 
         System.out.print("Masukkan Nomor Meja: ");
         nomorMeja[i] = sc.nextInt();
-        sc.nextLine();
 
         int j = 0; 
         while (true) {
@@ -93,7 +92,6 @@ public class Kelompok7{
                 }
 
             System.out.println("Total Harga Pesanan : Rp " + totalHarga[i]);
-            System.out.println("--------------------------");
             }
         }
         return;
@@ -127,8 +125,6 @@ public class Kelompok7{
                 if (jumlahUang >= totalHarga[i]) {
                     int kembalian = jumlahUang - totalHarga[i];
                     System.out.println("Pembayaran berhasil! Kembalian: Rp " + kembalian);
-                    statusPembayaran[i][0] = namaPelanggan[i];
-                    statusPembayaran[i][1] = "Lunas";
                 } else {
                     System.out.println("Uang yang dibayarkan kurang. Pembayaran gagal.");
                 }
