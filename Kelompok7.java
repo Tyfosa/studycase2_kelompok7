@@ -20,8 +20,56 @@ public class Kelompok7{
     }
 
     //TAMBAH PESANAN DAN VALIDASI
-    static void tambahPesanan(){
+    static void tambahPesanan() {
+        sc.nextLine(); 
+        System.out.print("\nMasukkan Nama Pelanggan: ");
+        namaPelanggan[i] = sc.nextLine();
 
+        System.out.print("Masukkan Nomor Meja: ");
+        nomorMeja[i] = sc.nextInt();
+
+        int j = 0; 
+        while (true) {
+            System.out.print("\nMasukkan Nama Menu (atau 'selesai' untuk keluar): ");
+            sc.nextLine(); 
+            String namaMenu = sc.nextLine();
+
+            if (namaMenu.equalsIgnoreCase("selesai")) break;
+
+            int indexMenu = cariMenu(namaMenu);
+            if (indexMenu == -1) {
+                System.out.println("Menu tidak ditemukan. Coba lagi.");
+                continue;
+            }
+
+            System.out.print("Masukkan Jumlah Item: ");
+            int jumlahItem = sc.nextInt();
+            if (jumlahItem <= 0) {
+                System.out.println("Jumlah item harus lebih dari 0.");
+                continue;
+            }
+
+            pesanan[i][j][0] = namaMenu;
+            jumlah[i][j] = jumlahItem;
+
+            int hargaMenu = Integer.parseInt(menuKafe[indexMenu][1]);
+            hargaSementara[i][j][0] = hargaMenu * jumlahItem;
+            totalHarga[i] += hargaSementara[i][j][0];
+
+            j++;
+            System.out.println("Pesanan berhasil ditambahkan.");
+        }
+
+        i++; 
+    }
+
+    static int cariMenu(String namaMenu) {
+        for (int i = 0; i < menuKafe.length; i++) {
+            if (menuKafe[i][0].equalsIgnoreCase(namaMenu)) {
+                return i;
+            }
+        }
+        return -1; 
     }
 
     //TAMPILKAN DAFTAR PESANAN
