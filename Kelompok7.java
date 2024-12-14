@@ -34,7 +34,10 @@ public class Kelompok7{
             sc.nextLine(); 
             String namaMenu = sc.nextLine();
 
-            if (namaMenu.equalsIgnoreCase("selesai")) break;
+            if (namaMenu.equalsIgnoreCase("selesai")){
+                System.out.println("\nPesanan diterima.");
+                break;
+            }
 
             int indexMenu = cariMenu(namaMenu);
             if (indexMenu == -1) {
